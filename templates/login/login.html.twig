@@ -15,6 +15,12 @@
 			<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
 		</div>
 
+		{% if error %}
+			<div class="alert alert-danger mt-4">
+				{{ error.messageKey|trans(error.messageData, 'security') }}
+			</div>
+		{% endif %}
+
 		<form action="{{ path('app_login') }}" method="post" name="login">
 			<div class="form-group">
 				<label for="username" class="form-label mt-4">Adresse email</label>
