@@ -9,11 +9,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
-    #[Route('/', name: 'app_login',  methods: ['GET', 'POST'])]
+    #[Route('/login', name: 'app_login',  methods: ['GET', 'POST'])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_homeTEST');
         }
         return $this->render('login/login.html.twig', [
             'error' => $authenticationUtils->getLastAuthenticationError()
