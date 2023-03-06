@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ encore_entry_link_tags('app') }}
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/darkly/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.3/dist/darkly/_variables.scss">
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<div class="jumbotron">
+			<h1 class="display-4">
+				RubanSoft
+			</h1>
+			<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
+		</div>
+
+		<form action="{{ path('app_login') }}" method="post" name="login">
+			<div class="form-group">
+				<label for="username" class="form-label mt-4">Adresse email</label>
+				<input type="email" class="form-control" id="username" name="_username" placeholder="exemple@AgenceImmoFictive.fr">
+			</div>
+			<div class="form-group">
+				<label for="password" class="form-label mt-4">Mot de passe</label>
+				<input type="password" class="form-control" id="password" name="_password" placeholder="********">
+			</div>
+
+			<button type="submit" class="btn btn-success mt-4">
+				Se connecter
+			</button>
+		</form>
+	</div>
+{% endblock %}
