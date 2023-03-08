@@ -40,7 +40,7 @@ class AppFixtures extends Fixture
         }
 
         // Article
-        for ($l = 1; $l < 10; $l++) {
+        for ($l = 1; $l < 30; $l++) {
             $article = new Article();
             $article->setName($this->faker->word())
                 ->setRefFilm(mt_rand(00001, 99999))
