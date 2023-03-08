@@ -2,11 +2,12 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Faker\Generator;
 use Faker\Factory;
 use App\Entity\User;
+use Faker\Generator;
+use App\Entity\Article;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
@@ -20,6 +21,7 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        // User
         for ($i = 1; $i < 10; $i++) {
             $user = new User();
             $user->setEmail($this->faker->email())
@@ -36,6 +38,18 @@ class AppFixtures extends Fixture
 
             $manager->persist($user);
         }
+
+        // Article
+        for ($l = 1; $l < 10; $l++) {
+            $article = new Article();
+            $article->setName($this->faker->word())
+                ->setRefFilm(mt_rand(00001, 99999))
+                ->setCodeMachine(mt_rand(00001, 99999))
+                ->setPrice(mt_rand(10, 999));
+
+            $manager->persist($article);
+        }
+
 
         $manager->flush();
     }
