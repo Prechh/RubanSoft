@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}
+	{{ article.name }}
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="main">
+		<div class="jumbotron">
+			<div class="container mt-5">
+				<div class="row">
+					<div class="col-md-4">
+						<h1>
+							{{ article.name }}
+						</h1>
+						<p style="font-size: 18px">
+							{{ article.price|number_format(2, '.', ',')  }}
+						</p>
+						<p>
+							<a href="#" class="btn btn-success">
+								Commander
+							</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
