@@ -49,4 +49,44 @@ class ArticleController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    #[Route('/article/edit/{id}', 'app_article_edit',  methods: ['GET', 'POST'])]
+    public function edit(Article $article, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(ArticleType::class, $article);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $article = $form->getData();
+
+            $manager->persist($article);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'L\'article à été modifié avec succès !'
+            );
+
+            return $this->redirectToRoute('app_article');
+        }
+
+        return $this->render('article/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/article/delete/{id}', 'app_article_delete',  methods: ['GET'])]
+    public function delete(EntityManagerInterface $manager, Article $article): Response
+    {
+        $manager->remove($article);
+        $manager->flush();
+
+
+        $this->addFlash(
+            'success',
+            'L\'article à été supprimé avec succès !'
+        );
+
+        return $this->redirectToRoute('app_article');
+    }
 }
