@@ -42,7 +42,7 @@ class ArticleController extends AbstractController
             $manager->persist($article);
             $manager->flush();
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_article');
         }
 
         return $this->render('article/new.html.twig', [
