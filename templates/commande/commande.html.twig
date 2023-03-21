@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Accueil
+{% endblock %}
+
+
+{% block body %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-success">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">RubanSoft</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Acheter
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="#">A propos
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Mon compte
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('app_login_logout') }}">Se déconnecter
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container mt-5">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">Numéros</th>
+					<th scope="col">Siret Client</th>
+					<th scope="col">Article</th>
+					<th scope="col">Quantitée</th>
+					<th scope="col">Ref film</th>
+					<th scope="col">Code machines</th>
+					<th scope="col">Date commande</th>
+					<th scope="col">Date DP</th>
+					<th scope="col">Date FP</th>
+					<th scope="col">Etat commande</th>
+					<th scope="col"></th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+
+
+			<tbody>
+				{% for commande in commandes %}
+					<tr class="table-light">
+						<th scope="row">{{ commande.id }}</th>
+						<td>{{ commande.client.siret }}</td>
+						<td>{{ commande.articles.name }}</td>
+						<td>{{ commande.quantity }}</td>
+						<td>{{ commande.articles.refFilm }}</td>
+						<td>{{ commande.articles.codeMachine }}</td>
+						<td>{{ commande.createdAt|date('d/m/Y') }}</td>
+						<td>{{ (commande.dateStartProd is null) ? 'Non renseigné' }}</td>
+						<td>{{ (commande.DateEndProd is null) ? 'Non rensignée' }}</td>
+						<td>{{ commande.state }}</td>
+						<td>
+							<a href="#" class="btn btn-warning">
+								Editer
+							</a>
+						</td>
+						<td>
+							<a href="#" class="btn btn-success">
+								Valider
+							</a>
+						</td>
+
+					</tr>
+				{% endfor %}
+			</tbody>
+			<table>
+
+				<div class="navigation d-flex justify-content-center">
+					{{ knp_pagination_render(commandes) }}
+				</div>
+
+				<a href="{{ path('app_article_new') }}" class="btn btn-success mt-4 d-flex justify-content-center">
+					Ajouter un article
+				</a>
+
+
+			</div>
+
+		{% endblock %}

@@ -20,8 +20,8 @@
 							{{ article.price|number_format(2, '.', ',')  }}
 						</p>
 						<p>
-							<a href="#" class="btn btn-success">
-								Commander
+							<a href="{{ path('app_article_edit', {id: article.id}) }}" class="btn btn-success">
+								Passer une commande
 							</a>
 						</p>
 					</div>
