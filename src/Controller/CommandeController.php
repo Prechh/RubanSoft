@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Commande;
+use App\Form\CommandeType;
 use App\Repository\CommandeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +25,32 @@ class CommandeController extends AbstractController
 
         return $this->render('commande/commande.html.twig', [
             'commandes' => $commandes,
+        ]);
+    }
+
+    #[Route('/commande/new', name: 'app_commande_new',  methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $manager): Response
+    {
+        $commande = new Commande();
+        $form = $this->createForm(CommandeType::class, $commande);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $commande = $form->getData();
+
+            $manager->persist($commande);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Le locataire à été ajoutée avec succès !'
+            );
+
+            return $this->redirectToRoute('app_commande_new');
+        }
+
+        return $this->render('commande/new.html.twig', [
+            'form' => $form->createView()
         ]);
     }
 }

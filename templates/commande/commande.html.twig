@@ -46,6 +46,11 @@
 				<tr>
 					<th scope="col">Numéros</th>
 					<th scope="col">Siret Client</th>
+					<th scope="col">Nom Client</th>
+					<th scope="col">Prenom Client</th>
+					<th scope="col">Adresse Client</th>
+					<th scope="col">Code postal Client</th>
+					<th scope="col">Ville</th>
 					<th scope="col">Article</th>
 					<th scope="col">Quantitée</th>
 					<th scope="col">Ref film</th>
@@ -64,7 +69,12 @@
 				{% for commande in commandes %}
 					<tr class="table-light">
 						<th scope="row">{{ commande.id }}</th>
-						<td>{{ commande.client.siret }}</td>
+						<td>{{ commande.siret }}</td>
+						<td>{{ commande.name }}</td>
+						<td>{{ commande.firstname }}</td>
+						<td>{{ commande.address }}</td>
+						<td>{{ commande.postalCode }}</td>
+						<td>{{ commande.city }}</td>
 						<td>{{ commande.articles.name }}</td>
 						<td>{{ commande.quantity }}</td>
 						<td>{{ commande.articles.refFilm }}</td>
@@ -92,10 +102,6 @@
 				<div class="navigation d-flex justify-content-center">
 					{{ knp_pagination_render(commandes) }}
 				</div>
-
-				<a href="{{ path('app_article_new') }}" class="btn btn-success mt-4 d-flex justify-content-center">
-					Ajouter un article
-				</a>
 
 
 			</div>
