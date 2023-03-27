@@ -11,6 +11,20 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
 class Commande
 {
+
+    const STATE = [
+        0 => 'pas en prod',
+        1 => 'en cours de prod',
+        2 => 'prod terminée'
+    ];
+
+    const STATEDELIVERY = [
+        0 => 'pas encore livré',
+        1 => 'en cours de livraison',
+        2 => 'livraison terminée'
+    ];
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -50,7 +64,7 @@ class Commande
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $state = null;
+    private ?string $state = "0";
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $siret = null;
@@ -69,6 +83,15 @@ class Commande
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $city = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $stateDelivery = "0";
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $dateEndDelivery = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $price = null;
 
     public function __construct()
     {
@@ -228,8 +251,32 @@ class Commande
     {
         $this->state = $state;
 
+
         return $this;
     }
+
+    public function getStateType(): string
+    {
+        return self::STATE[$this->state];
+    }
+
+    public function getStateDelivery(): ?string
+    {
+        return $this->stateDelivery;
+    }
+
+    public function setStateDelivery(?string $stateDelivery): self
+    {
+        $this->stateDelivery = $stateDelivery;
+
+        return $this;
+    }
+
+    public function getStateDeliveryType(): string
+    {
+        return self::STATEDELIVERY[$this->stateDelivery];
+    }
+
 
     public function __toString()
     {
@@ -304,6 +351,30 @@ class Commande
     public function setCity(?string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getDateEndDelivery(): ?string
+    {
+        return $this->dateEndDelivery;
+    }
+
+    public function setDateEndDelivery(?string $dateEndDelivery): self
+    {
+        $this->dateEndDelivery = $dateEndDelivery;
+
+        return $this;
+    }
+
+    public function getPrice(): ?string
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?string $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegistrationController!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="mt-4">
+			Editer un article</h1>
+
+
+		{{ form_start(form) }}
+		{{form_row(form.articles)}}
+		{{form_row(form.quantity)}}
+		{{form_row(form.dateStartProd)}}
+		{{form_row(form.dateEndProd, {'required': false})}}
+		{{form_row(form.state)}}
+
+		{{ form_end(form) }}
+
+	</div>
+
+{% endblock %}

@@ -40,46 +40,60 @@
 		</div>
 	</nav>
 
-	<div class="container mt-5">
+	<div class="mt-5">
 		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th scope="col">Numéros</th>
+					<th scope="col">Siret Client</th>
+					<th scope="col">Nom Client</th>
+					<th scope="col">Adresse Client</th>
+					<th scope="col">Code postal Client</th>
+					<th scope="col">Ville</th>
 					<th scope="col">Article</th>
 					<th scope="col">Quantitée</th>
-					<th scope="col">Ref film</th>
-					<th scope="col">Code machines</th>
+					<th scope="col">Prix</th>
 					<th scope="col">Date commande</th>
-					<th scope="col">Date DP</th>
-					<th scope="col">Date FP</th>
 					<th scope="col">Etat Production</th>
+					<th scope="col">poids total</th>
+					<th scope="col">numéros de suivit</th>
+					<th scope="col">Départ commande</th>
+					<th scope="col">Arrivé Commande</th>
+					<th scope="col">Etat Livraison</th>
 					<th scope="col"></th>
-
+					<th scope="col"></th>
 				</tr>
 			</thead>
 
 
 			<tbody>
 				{% for commande in commandes %}
+					{% if commande.state is same as "2" %}
+						<tr class="table-light">
+							<th scope="row">{{ commande.id }}</th>
+							<td>{{ commande.siret }}</td>
+							<td>{{ commande.name }}</td>
+							<td>{{ commande.address }}</td>
+							<td>{{ commande.postalCode }}</td>
+							<td>{{ commande.city }}</td>
+							<td>{{ commande.articles.name }}</td>
+							<td>{{ commande.quantity }}</td>
+							<td>{{ commande.articles.price }}</td>
+							<td>{{ commande.createdAt|date('d/m/Y') }}</td>
+							<td>{{ commande.stateType }}</td>
+							<td>{{ commande.weight }}</td>
+							<td>{{ commande.trackingNumber }}</td>
+							<td>{{ commande.dateStartDelivery }}</td>
+							<td>{{ commande.dateEndDelivery }}</td>
+							<td>{{ commande.stateDeliveryType }}</td>
+							<td>
+								<a href="{{ path('app_commande_logistique_edit', {id: commande.id}) }}" class="btn btn-warning">
+									Editer
+								</a>
+							</td>
 
-					<tr class="table-light">
-						<th scope="row">{{ commande.id }}</th>
-						<td>{{ commande.articles.name }}</td>
-						<td>{{ commande.quantity }}</td>
-						<td>{{ commande.articles.refFilm }}</td>
-						<td>{{ commande.articles.codeMachine }}</td>
-						<td>{{ commande.createdAt|date('d/m/Y') }}</td>
-						<td>{{ commande.dateStartProd }}</td>
-						<td>{{ commande.DateEndProd  }}</td>
-						<td>{{ commande.stateType }}</td>
-						<td>
-							<a href="{{ path('app_commande_edit', {id: commande.id}) }}" class="btn btn-warning">
-								Editer
-							</a>
-						</td>
-
-
-					</tr>
+						</tr>
+					{% endif %}
 				{% endfor %}
 			</tbody>
 			<table>
@@ -90,6 +104,5 @@
 
 
 			</div>
-
 
 		{% endblock %}

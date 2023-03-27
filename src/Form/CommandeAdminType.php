@@ -4,13 +4,14 @@ namespace App\Form;
 
 use App\Entity\Commande;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CommandeType extends AbstractType
+class CommandeAdminType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -30,11 +31,12 @@ class CommandeType extends AbstractType
                 ]
             ])
 
-            ->add('siret', TextType::class, [
+
+            ->add('dateStartProd', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Numéros de siret :',
+                'label' => 'Date début de production :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -43,12 +45,27 @@ class CommandeType extends AbstractType
                 ]
             ])
 
-
-            ->add('name', TextType::class, [
+            ->add('dateEndProd', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Nom :',
+                'label' => 'Date fin de production :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+
+            ])
+
+            ->add('state', ChoiceType::class, [
+                'choices' => [
+                    'Pas en prod' => 0,
+                    'En cours de prod' => 1,
+                    'Prod terminé' => 2
+                ],
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Etat de la production :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -56,65 +73,6 @@ class CommandeType extends AbstractType
                     new Assert\NotBlank(),
                 ]
             ])
-
-            ->add('firstname', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Prenom :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('address', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Adresse :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4',
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('postalCode', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Code postal :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('city', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Ville :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-
-
-
-
-
-
 
             ->add('Submit', SubmitType::class, [
                 'attr' => [
