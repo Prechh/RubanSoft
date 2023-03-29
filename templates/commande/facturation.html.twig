@@ -87,7 +87,7 @@
 							<td>{{ commande.dateEndDelivery }}</td>
 							<td>{{ commande.stateDeliveryType }}</td>
 							<td>
-								<a href="{{ path('app_commande_logistique_edit', {id: commande.id}) }}" class="btn btn-warning">
+								<a href="{{ path('commande.pdf', {id: commande.id}) }}" class="btn btn-warning">
 									Editer
 								</a>
 							</td>

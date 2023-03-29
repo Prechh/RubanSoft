@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Accueil
+{% endblock %}
+
+
+{% block body %}
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th scope="col">Facture</th>
+				<th scope="col">Date</th>
+				<th scope="col">Client</th>
+			</tr>
+		</thead>
+
+		<tbody>
+
+			<tr class="table-light">
+				<th scope="row">{{ commande.id }}</th>
+				<td>{{ commande.dateStartDelivery }}</td>
+				<td>{{ commande.name }}</td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+{% endblock %}
