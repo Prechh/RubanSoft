@@ -11,31 +11,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class CommandeType extends AbstractType
+class CommandeFacturationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('articles')
-
-            ->add('quantity', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Quantitée :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
             ->add('siret', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Numéros de siret :',
+                'label' => 'Siret :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -43,26 +28,12 @@ class CommandeType extends AbstractType
                     new Assert\NotBlank(),
                 ]
             ])
-
 
             ->add('name', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
                 'label' => 'Nom :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('firstname', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Prenom :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -97,15 +68,13 @@ class CommandeType extends AbstractType
                 ]
             ])
 
-
-
             ->add('address', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
                 'label' => 'Adresse :',
                 'label_attr' => [
-                    'class' => 'form-label mt-4',
+                    'class' => 'form-label mt-4'
                 ],
                 'constraints' => [
                     new Assert\NotBlank(),
@@ -116,7 +85,7 @@ class CommandeType extends AbstractType
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Code postal :',
+                'label' => 'Code postale :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -138,18 +107,90 @@ class CommandeType extends AbstractType
                 ]
             ])
 
+            ->add('articles')
+
+            ->add('quantity', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Quantitée :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
+
+            ->add('dateDelivery', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Date commande :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
 
 
+            ->add('weight', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Poids total :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
 
+            ->add('trackingNumber', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Numéros de suivie :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
 
+            ->add('dateStartDelivery', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Date départ livraison  :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
 
+            ->add('dateEndDelivery', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Date arrivée livraison  :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
 
+            ])
 
             ->add('Submit', SubmitType::class, [
                 'attr' => [
                     "class" => 'btn btn-success mt-5',
                 ],
-                'label' => 'S\'inscrire',
+                'label' => 'Envoyer mail',
 
             ]);
     }

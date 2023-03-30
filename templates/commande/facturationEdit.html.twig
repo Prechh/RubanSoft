@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RegistrationController!
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="mt-4">
+			Editer un article</h1>
+
+
+		{{ form_start(form) }}
+
+		{{form_row(form.articles)}}
+		{{form_row(form.siret)}}
+		{{form_row(form.name)}}
+		{{form_row(form.email)}}
+		{{form_row(form.phoneNumber)}}
+		{{form_row(form.address)}}
+		{{form_row(form.postalCode)}}
+		{{form_row(form.city)}}
+		{{form_row(form.quantity)}}
+		{{form_row(form.dateDelivery)}}
+		{{form_row(form.weight)}}
+		{{form_row(form.trackingNumber)}}
+		{{form_row(form.dateStartDelivery)}}
+		{{form_row(form.dateEndDelivery, {'required': false})}}
+
+		{{ form_end(form) }}
+
+	</div>
+
+{% endblock %}

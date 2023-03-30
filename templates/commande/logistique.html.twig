@@ -45,10 +45,12 @@
 			<thead>
 				<tr>
 					<th scope="col">Numéros</th>
-					<th scope="col">Siret Client</th>
-					<th scope="col">Nom Client</th>
-					<th scope="col">Adresse Client</th>
-					<th scope="col">Code postal Client</th>
+					<th scope="col">Siret</th>
+					<th scope="col">Nom</th>
+					<th scope="col">Email</th>
+					<th scope="col">Numéros Téléphone</th>
+					<th scope="col">Adresse</th>
+					<th scope="col">Code postal</th>
 					<th scope="col">Ville</th>
 					<th scope="col">Article</th>
 					<th scope="col">Quantitée</th>
@@ -73,6 +75,8 @@
 							<th scope="row">{{ commande.id }}</th>
 							<td>{{ commande.siret }}</td>
 							<td>{{ commande.name }}</td>
+							<td>{{ commande.email }}</td>
+							<td>{{ commande.phoneNumber }}</td>
 							<td>{{ commande.address }}</td>
 							<td>{{ commande.postalCode }}</td>
 							<td>{{ commande.city }}</td>

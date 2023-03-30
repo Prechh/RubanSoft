@@ -67,6 +67,8 @@ class AppFixtures extends Fixture
                 ->setSiret(mt_rand(01000, 98000))
                 ->setName($this->faker->name())
                 ->setFirstname($this->faker->firstName())
+                ->setEmail($this->faker->email())
+                ->setPhoneNumber($this->faker->phoneNumber())
                 ->setAddress($this->faker->address())
                 ->setPostalcode(mt_rand(01000, 98000))
                 ->setCity($this->faker->city());
