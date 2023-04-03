@@ -8,25 +8,110 @@
 
 {% block body %}
 
+	<h1>
+		Facture
+	</h1>
+
+
+	<p>
+		Vendeur : 
+																																																								RubanSoft
+		<br/>
+		Service@RubanSoft.com
+		<br/>
+		0514258423
+		<br/>
+		17, rue William Barthelemy
+		<br/>
+		97952
+		<br/>
+		Lefort
+
+	</p>
+
+	<p>
+		Client :
+		{{ commande.name}}
+		<br/>
+		{{ commande.email}}
+		<br/>
+		{{ commande.phoneNumber}}
+		<br/>
+		{{ commande.address}}
+		<br/>
+		{{ commande.postalCode}}
+		<br/>
+		{{ commande.city}}
+		<br/>
+	</p>
+
+
+	<p>
+		Date de facturation :
+		{{ commande.dateDelivery }}
+		<br/>
+		Numéros de facture :
+		{{ commande.id}}
+		<br/>
+		Paiment : 30 Jours
+		<br/>
+		Référence : 1436
+		<br/>
+
+
+	</p>
+
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th scope="col">Facture</th>
-				<th scope="col">Date</th>
-				<th scope="col">Client</th>
+				<th scope="col">Article</th>
+				<th scope="col">Quantitée</th>
+				<th scope="col">Prix Unitaire</th>
+				<th scope="col">%TVA</th>
+				<th scope="col">Total TVA</th>
+				<th scope="col">Total TTC</th>
+
 			</tr>
 		</thead>
 
 		<tbody>
-
 			<tr class="table-light">
-				<th scope="row">{{ commande.id }}</th>
-				<td>{{ commande.dateStartDelivery }}</td>
-				<td>{{ commande.name }}</td>
+				<th scope="row">{{ commande.articles.name }}</th>
+				<td>{{ commande.quantity}}</td>
+				<td>{{ commande.unitPrice }}
+					€</td>
+				<td>
+					20 %</td>
+				<td>
+					{{ commande.totalTVAPrice }}
+					€
+				</td>
+				<td>
+					{{ commande.TTCPrice }}
+					€
+				</td>
 			</tr>
 
 		</tbody>
 	</table>
+
+	<p>
+		TOTAL HT :
+		{{ commande.totalPrice}}
+		€
+	</p>
+
+	<p>
+		TOTAL TVA :
+		{{ commande.totalTVAPrice}}
+		€
+	</p>
+
+	<p>
+		TOTAL TTC :
+		{{ commande.TTCPrice}}
+		€
+	</p>
 
 
 {% endblock %}

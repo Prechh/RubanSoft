@@ -187,7 +187,7 @@ class CommandeController extends AbstractController
     {
         $html = $this->renderView('commande/factureTemplate.html.twig', [
             'commande' => $commande,
-            "title" => "TITREPDF"
+            "title" => "TITREPDF",
         ]);
 
         $filename = "pdftitre";

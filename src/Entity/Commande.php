@@ -99,6 +99,22 @@ class Commande
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $phoneNumber = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $unitPrice = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $totalPrice = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $TVAPrice = 1.20;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $TTCPrice = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $totalTVAPrice = null;
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -407,5 +423,86 @@ class Commande
         $this->phoneNumber = $phoneNumber;
 
         return $this;
+    }
+
+    public function getUnitPrice(): ?float
+    {
+        return $this->unitPrice;
+    }
+
+    public function setUnitPrice(?float $unitPrice): self
+    {
+        $this->unitPrice = $unitPrice;
+
+        return $this;
+    }
+
+    public function getTotalPrice(): ?float
+    {
+        return $this->totalPrice;
+    }
+
+    public function setTotalPrice(?float $totalPrice): self
+    {
+        $this->totalPrice = $totalPrice;
+
+        return $this;
+    }
+
+    public function getTVAPrice(): ?float
+    {
+        return $this->TVAPrice;
+    }
+
+    public function setTVAPrice(?float $TVAPrice): self
+    {
+        $this->TVAPrice = $TVAPrice;
+
+        return $this;
+    }
+
+    public function getTTCPrice(): ?float
+    {
+        return $this->TTCPrice;
+    }
+
+    public function setTTCPrice(?float $TTCPrice): self
+    {
+        $this->TTCPrice = $TTCPrice;
+
+        return $this;
+    }
+
+    public function getTotalTVAPrice(): ?float
+    {
+        return $this->totalTVAPrice;
+    }
+
+    public function setTotalTVAPrice(?float $totalTVAPrice): self
+    {
+        $this->totalTVAPrice = $totalTVAPrice;
+
+        return $this;
+    }
+
+    #[ORM\PrePersist()]
+    #[ORM\PreUpdate()]
+    public function updateTotalPrice()
+    {
+        $this->totalPrice = $this->unitPrice * $this->quantity;
+    }
+
+    #[ORM\PrePersist()]
+    #[ORM\PreUpdate()]
+    public function updateTTCPrice()
+    {
+        $this->TTCPrice = $this->totalPrice * $this->TVAPrice;
+    }
+
+    #[ORM\PrePersist()]
+    #[ORM\PreUpdate()]
+    public function updateTotalTVAPrice()
+    {
+        $this->totalTVAPrice = $this->TTCPrice - $this->totalPrice;
     }
 }

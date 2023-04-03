@@ -62,6 +62,7 @@ class AppFixtures extends Fixture
                 ->setDateDelivery($this->faker->date())
                 ->setArticles($articles[mt_rand(0, count($articles) - 1)])
                 ->setPrice(mt_rand(10, 200))
+                ->setUnitPrice(mt_rand(10, 200))
                 ->setClient($users[mt_rand(0, count($users) - 1)])
                 ->setState("0")
                 ->setSiret(mt_rand(01000, 98000))
