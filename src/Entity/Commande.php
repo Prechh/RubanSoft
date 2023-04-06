@@ -3,9 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
-use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: CommandeRepository::class)]
@@ -36,25 +35,57 @@ class Commande
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     private ?Article $articles = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 2)]
+    #[Assert\NotNull()]
+    #[Assert\Positive()]
+    #[Assert\Length(
+        max: 2,
+        maxMessage: 'Cette valeur est trop longue. Elle doit contenir au maximum 2 caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
     private ?string $quantity = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Date()]
     private ?string $dateDelivery = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Date()]
     private ?string $dateStartProd = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Date()]
     private ?string $dateEndProd = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Date()]
     private ?string $dateStartDelivery = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 8, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
+    #[Assert\Length(
+        exactly: 8,
+        exactMessage: 'Le code machine entrée n\'est pas conforme. Il doit contenir exactement 8 caractères',
+    )]
     private ?string $trackingNumber = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 2, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
+    #[Assert\Length(
+        min: 1,
+        max: 2,
+        minMessage: 'Cette valeur est trop courte. Elle doit contenir au minimum 1 caractère',
+        maxMessage: 'Cette valeur est trop longue. Elle doit contenir au maximum caractères',
+    )]
     private ?string $weight = null;
 
     #[ORM\Column(nullable: true)]
@@ -66,40 +97,116 @@ class Commande
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $state = "0";
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 14, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
+    #[Assert\Length(
+        exactly: 14,
+        exactMessage: 'Le numéros de SIRET entrée n\'est pas conforme. Il doit contenir exactement 14 caractères',
+    )]
     private ?string $siret = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[a-z]+$/i',
+        htmlPattern: '^[a-zA-Z]+$',
+        message: 'Cette valeur ne doit pas contenir de chiffres ou d\'espace'
+    )]
+    #[Assert\Length(
+        min: 3,
+        max: 50,
+        minMessage: 'Votre nom est trop court. Il doit contenir au minimum 3 caractères',
+        maxMessage: 'Votre nom est trop long. Il doit contenir au maximum 50 caractères',
+    )]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[a-z]+$/i',
+        htmlPattern: '^[a-zA-Z]+$',
+        message: 'Cette valeur ne doit pas contenir de chiffres ou d\'espace'
+    )]
+    #[Assert\Length(
+        min: 3,
+        max: 50,
+        minMessage: 'Votre prénom est trop court. Il doit contenir au minimum 3 caractères',
+        maxMessage: 'Votre prénom est trop long. Il doit contenir au maximum 50 caractères',
+    )]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Length(
+        min: 10,
+        max: 50,
+        minMessage: 'Le nom de votre adresse est trop court. Il doit contenir au minimum 10 caractères',
+        maxMessage: 'Le nom de votre adresse est trop long. Il doit contenir au maximum 50 caractères',
+    )]
     private ?string $address = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 5, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
+    #[Assert\Length(
+        exactly: 5,
+        exactMessage: 'Le code postale entrée n\'est pas conforme. Il doit contenir exactement 5 caractères',
+    )]
     private ?string $postalCode = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 20, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[a-z]+$/i',
+        htmlPattern: '^[a-zA-Z]+$',
+        message: 'Cette valeur ne doit pas contenir de chiffres'
+    )]
+    #[Assert\Length(
+        min: 4,
+        max: 20,
+        minMessage: 'Le nom de votre ville est trop court. Il doit contenir au minimum 4 caractères',
+        maxMessage: 'Le nom de votre ville est trop long. Il doit contenir au maximum 20 caractères',
+    )]
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Date()]
     private ?string $stateDelivery = "0";
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Date()]
     private ?string $dateEndDelivery = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $price = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Email()]
+    #[Assert\Length(
+        min: 4,
+        max: 50,
+        minMessage: 'Votre adresse mail est trop courte. Elle doit contenir au minimum 4 caractères',
+        maxMessage: 'Votre adresse mail est trop longue. Elle doit contenir au maximum 50 caractères',
+    )]
     private ?string $Email = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 10, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^(0)[1-9](\d{2}){4}+$/i',
+        message: 'Votre nuémros n\'est pas valide ou ne contient pas que des chiffres'
+    )]
     private ?string $phoneNumber = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
+    #[Assert\Length(
+        max: 2,
+        maxMessage: 'Votre prix est trop long. Il doit contenir au maximum 3 caractères',
+    )]
     private ?float $unitPrice = null;
 
     #[ORM\Column(nullable: true)]

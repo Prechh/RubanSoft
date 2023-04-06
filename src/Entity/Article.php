@@ -6,6 +6,7 @@ use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article
@@ -15,16 +16,40 @@ class Article
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Le nom de votre article est trop court. Il doit contenir au minimum 2 caractères',
+        maxMessage: 'Le nom de votre article est trop long. Il doit contenir au maximum 50 caractères',
+    )]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 6)]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
+    #[Assert\Length(
+        exactly: 6,
+        exactMessage: 'La référence du film entrée n\'est pas conforme. Elle doit contenir exactement 6 caractères',
+    )]
     private ?string $refFilm = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 6)]
+    #[Assert\Regex(
+        pattern: '/^[0-9]+$/i',
+        message: 'Cette valeur doit uniquement contenir des chiffres'
+    )]
+    #[Assert\Length(
+        exactly: 6,
+        exactMessage: 'Le code machine entrée n\'est pas conforme. Il doit contenir exactement 6 caractères',
+    )]
     private ?string $codeMachine = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
+    #[Assert\Positive()]
     private ?float $price = null;
 
     #[ORM\Column]
