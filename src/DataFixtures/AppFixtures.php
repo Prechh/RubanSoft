@@ -41,43 +41,6 @@ class AppFixtures extends Fixture
             $manager->persist($user);
         }
 
-        // Article
-        $articles = [];
-        for ($j = 1; $j < 30; $j++) {
-            $article = new Article();
-            $article->setName($this->faker->word())
-                ->setRefFilm(mt_rand(00001, 99999))
-                ->setCodeMachine(mt_rand(00001, 99999))
-                ->setPrice(mt_rand(10, 999));
-
-            $articles[] = $article;
-            $manager->persist($article);
-        }
-
-
-        //Commande
-        for ($k = 0; $k < 10; $k++) {
-            $commande = new Commande();
-            $commande->setQuantity(mt_rand(1, 5))
-                ->setDateDelivery($this->faker->date())
-                ->setArticles($articles[mt_rand(0, count($articles) - 1)])
-                ->setPrice(mt_rand(10, 200))
-                ->setUnitPrice(mt_rand(10, 200))
-                ->setClient($users[mt_rand(0, count($users) - 1)])
-                ->setState("0")
-                ->setSiret(mt_rand(01000, 98000))
-                ->setName($this->faker->name())
-                ->setFirstname($this->faker->firstName())
-                ->setEmail($this->faker->email())
-                ->setPhoneNumber($this->faker->phoneNumber())
-                ->setAddress($this->faker->address())
-                ->setPostalcode(mt_rand(01000, 98000))
-                ->setCity($this->faker->city());
-
-
-
-            $manager->persist($commande);
-        }
 
 
         $manager->flush();

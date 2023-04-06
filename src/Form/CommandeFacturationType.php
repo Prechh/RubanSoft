@@ -42,6 +42,19 @@ class CommandeFacturationType extends AbstractType
                 ]
             ])
 
+            ->add('firstname', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Prenom :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
+
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -114,19 +127,6 @@ class CommandeFacturationType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'label' => 'Quantitée :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('dateDelivery', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Date commande :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],

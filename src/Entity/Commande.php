@@ -489,7 +489,7 @@ class Commande
     #[ORM\PreUpdate()]
     public function updateTotalPrice()
     {
-        $this->totalPrice = $this->unitPrice * $this->quantity;
+        $this->totalPrice = $this->articles->getPrice() * $this->quantity;
     }
 
     #[ORM\PrePersist()]

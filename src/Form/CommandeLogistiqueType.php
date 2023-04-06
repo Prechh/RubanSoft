@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+
 class CommandeLogistiqueType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -35,6 +36,19 @@ class CommandeLogistiqueType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'label' => 'Nom :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
+
+            ->add('firstname', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Prenom :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -89,19 +103,6 @@ class CommandeLogistiqueType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'label' => 'Quantitée :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('dateDelivery', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Date commande :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],

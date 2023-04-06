@@ -5,7 +5,8 @@ namespace App\Controller;
 use Knp\Snappy\Pdf;
 use App\Entity\Commande;
 use App\Form\CommandeType;
-use App\Service\PdfService;
+use App\Event\NewCommandeEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Form\CommandeAdminType;
 use Symfony\Component\Mime\Email;
 use App\Form\CommandeLogistiqueType;
@@ -39,7 +40,7 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/commande/new', name: 'app_commande_new',  methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
+    public function new(MailerInterface $mailer, Request $request, EntityManagerInterface $manager): Response
     {
         $commande = new Commande();
         $form = $this->createForm(CommandeType::class, $commande);
@@ -51,12 +52,24 @@ class CommandeController extends AbstractController
             $manager->persist($commande);
             $manager->flush();
 
+            $email = (new Email())
+                ->from('RubanSoft@RubanSoft.com')
+                ->to('ServiceProduction@RubanSoft.com')
+                ->subject('Une nouvelle commande est arrivée !')
+                ->html("<h1> Une nouvelle commande est arrivée ! </h1>" . "<p> Email : ServiceFacturation@RubanSoft.com  </p>");
+
+            $transport = Transport::fromDsn($_ENV['MAILER_DSN']);
+            $mailer = new Mailer($transport);
+
+            $mailer->send($email);
+
+
             $this->addFlash(
                 'success',
                 'Le locataire à été ajoutée avec succès !'
             );
 
-            return $this->redirectToRoute('app_commande_new');
+            return $this->redirectToRoute('app_article_user');
         }
 
         return $this->render('commande/new.html.twig', [
@@ -76,6 +89,19 @@ class CommandeController extends AbstractController
 
             $manager->persist($commande);
             $manager->flush();
+
+
+            $email = (new Email())
+                ->from('RubanSoft@RubanSoft.com')
+                ->to('ServiceLogistique@RubanSoft.com')
+                ->subject('Une nouvelle commande est arrivée !')
+                ->html("<h1> Une nouvelle commande est arrivée ! </h1>" . "<p> Email : ServiceFacturation@RubanSoft.com  </p>");
+
+            $transport = Transport::fromDsn($_ENV['MAILER_DSN']);
+            $mailer = new Mailer($transport);
+
+            $mailer->send($email);
+
 
             $this->addFlash(
                 'success',
@@ -115,6 +141,18 @@ class CommandeController extends AbstractController
 
             $manager->persist($commande);
             $manager->flush();
+
+            $email = (new Email())
+                ->from('RubanSoft@RubanSoft.com')
+                ->to('ServiceFacturation@RubanSoft.com')
+                ->subject('Une nouvelle commande est arrivée !')
+                ->html("<h1> Une nouvelle commande est arrivée ! </h1>" . "<p> Email : ServiceFacturation@RubanSoft.com  </p>");
+
+            $transport = Transport::fromDsn($_ENV['MAILER_DSN']);
+            $mailer = new Mailer($transport);
+
+            $mailer->send($email);
+
 
             $this->addFlash(
                 'success',

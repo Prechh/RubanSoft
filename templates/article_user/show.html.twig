@@ -18,9 +18,10 @@
 						</h1>
 						<p style="font-size: 18px">
 							{{ article.price|number_format(2, '.', ',')  }}
+							€
 						</p>
 						<p>
-							<a href="{{ path('app_article_edit', {id: article.id}) }}" class="btn btn-success">
+							<a href="{{ path('app_commande_new', {id: article.id}) }}" class="btn btn-success">
 								Passer une commande
 							</a>
 						</p>
