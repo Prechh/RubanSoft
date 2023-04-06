@@ -40,6 +40,14 @@
 		</div>
 	</nav>
 
+	<div class="container">
+		{% for message in app.flashes('success') %}
+			<div style="margin-top: 25px" class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+	</div>
+
 	<div class="mt-5">
 		<table class="table table-hover">
 			<thead>

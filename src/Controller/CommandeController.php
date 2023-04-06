@@ -5,8 +5,6 @@ namespace App\Controller;
 use Knp\Snappy\Pdf;
 use App\Entity\Commande;
 use App\Form\CommandeType;
-use App\Event\NewCommandeEvent;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use App\Form\CommandeAdminType;
 use Symfony\Component\Mime\Email;
 use App\Form\CommandeLogistiqueType;
@@ -66,7 +64,7 @@ class CommandeController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Le locataire à été ajoutée avec succès !'
+                'Votre article à été commandé avec succès !'
             );
 
             return $this->redirectToRoute('app_article_user');
@@ -207,7 +205,7 @@ class CommandeController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'La commande à été modifié avec succès !'
+                'Mail envoyé avec succès !'
             );
 
             return $this->redirectToRoute('app_commande_facturation');

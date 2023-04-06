@@ -42,7 +42,10 @@ class ArticleController extends AbstractController
             $manager->persist($article);
             $manager->flush();
 
-            return $this->redirectToRoute('app_article');
+            $this->addFlash(
+                'success',
+                'L\'article à été ajoutée avec succès !'
+            );
         }
 
         return $this->render('article/new.html.twig', [

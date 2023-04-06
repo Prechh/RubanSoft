@@ -49,19 +49,15 @@ class Commande
     private ?string $quantity = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Date()]
     private ?string $dateDelivery = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Date()]
     private ?string $dateStartProd = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Date()]
     private ?string $dateEndProd = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Date()]
     private ?string $dateStartDelivery = null;
 
     #[ORM\Column(length: 8, nullable: true)]
@@ -71,7 +67,7 @@ class Commande
     )]
     #[Assert\Length(
         exactly: 8,
-        exactMessage: 'Le code machine entrée n\'est pas conforme. Il doit contenir exactement 8 caractères',
+        exactMessage: 'Le numéros de suivie entrée n\'est pas conforme. Il doit contenir exactement 8 caractères',
     )]
     private ?string $trackingNumber = null;
 
@@ -171,11 +167,9 @@ class Commande
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Date()]
     private ?string $stateDelivery = "0";
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Date()]
     private ?string $dateEndDelivery = null;
 
     #[ORM\Column(length: 255, nullable: true)]

@@ -78,7 +78,7 @@ class CommandeAdminType extends AbstractType
                 'attr' => [
                     "class" => 'btn btn-success mt-5',
                 ],
-                'label' => 'S\'inscrire',
+                'label' => 'Envoyer les modifications',
 
             ]);
     }

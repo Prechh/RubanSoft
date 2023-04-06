@@ -1,10 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RegistrationController!
+{% block title %}
+	Ajouter un article
 {% endblock %}
 
+
 {% block body %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-success">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">RubanSoft</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav me-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Acheter
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="#">A propos
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Mon compte
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('app_login_logout') }}">Se déconnecter
+							<span class="visually-hidden">(current)</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
 	<div class="container">
+
+		{% for message in app.flashes('success') %}
+			<div style="margin-top: 25px" class="alert alert-success">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
 		<h1 class="mt-4">
 			Ajouter un article</h1>
 

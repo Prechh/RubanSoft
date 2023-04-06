@@ -57,11 +57,13 @@ class CommandeLogistiqueType extends AbstractType
                 ]
             ])
 
-            ->add('address', TextType::class, [
+
+
+            ->add('postalCode', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Adresse :',
+                'label' => 'Code postale :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -70,11 +72,11 @@ class CommandeLogistiqueType extends AbstractType
                 ]
             ])
 
-            ->add('postalCode', TextType::class, [
+            ->add('address', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Code postale :',
+                'label' => 'Adresse :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -196,7 +198,7 @@ class CommandeLogistiqueType extends AbstractType
                 'attr' => [
                     "class" => 'btn btn-success mt-5',
                 ],
-                'label' => 'S\'inscrire',
+                'label' => 'Envoyer les modifications',
 
             ]);
     }
