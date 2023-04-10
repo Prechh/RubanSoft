@@ -67,6 +67,19 @@ class ArticleType extends AbstractType
                 ]
             ])
 
+            ->add('stock', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Quntitée en stock :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
+
             ->add('Submit', SubmitType::class, [
                 'attr' => [
                     "class" => 'btn btn-success mt-5',

@@ -58,6 +58,9 @@ class Article
     #[ORM\OneToMany(mappedBy: 'articles', targetEntity: Commande::class)]
     private Collection $commandes;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $stock = null;
+
     public function __construct()
     {
         $this->cretaedAt = new \DateTimeImmutable();
@@ -132,10 +135,19 @@ class Article
     /**
      * @return Collection<int, Commande>
      */
-    public function getCommandes(): Collection
+    public function getCommande()
     {
         return $this->commandes;
     }
+
+    public function setCommande(?Commande $commande): self
+    {
+        $this->commandes = $commande;
+
+        return $this;
+    }
+
+
 
     public function addCommande(Commande $commande): self
     {
@@ -162,5 +174,17 @@ class Article
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getStock(): ?int
+    {
+        return $this->stock;
+    }
+
+    public function setStock(?int $stock): self
+    {
+        $this->stock = $stock;
+
+        return $this;
     }
 }
