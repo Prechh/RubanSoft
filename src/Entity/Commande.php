@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -214,6 +215,12 @@ class Commande
 
     #[ORM\Column(nullable: true)]
     private ?float $totalTVAPrice = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $desiredDeliveryDate = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $desiredDate = null;
 
 
     public function __construct()
@@ -605,5 +612,29 @@ class Commande
     public function updateTotalTVAPrice()
     {
         $this->totalTVAPrice = $this->TTCPrice - $this->totalPrice;
+    }
+
+    public function getDesiredDeliveryDate(): ?\DateTime
+    {
+        return $this->desiredDeliveryDate;
+    }
+
+    public function setDesiredDeliveryDate(?\DateTime $desiredDeliveryDate): self
+    {
+        $this->desiredDeliveryDate = $desiredDeliveryDate;
+
+        return $this;
+    }
+
+    public function getDesiredDate(): ?string
+    {
+        return $this->desiredDate;
+    }
+
+    public function setDesiredDate(?string $desiredDate): self
+    {
+        $this->desiredDate = $desiredDate;
+
+        return $this;
     }
 }

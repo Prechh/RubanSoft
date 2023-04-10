@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Commande;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -10,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class CommandeType extends AbstractType
 {
@@ -130,6 +132,19 @@ class CommandeType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'label' => 'Ville :',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank(),
+                ]
+            ])
+
+            ->add('desiredDate', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Date de livraison souhaitée :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
