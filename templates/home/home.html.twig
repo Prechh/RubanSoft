@@ -16,22 +16,12 @@
 			<div class="collapse navbar-collapse" id="navbarColor03">
 				<ul class="navbar-nav me-auto">
 					<li class="nav-item">
-						<a class="nav-link active" href="#">Acheter
+						<a class="nav-link active" href="{{ path('app_article_user') }}">Acheter
 							<span class="visually-hidden">(current)</span>
 						</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link active" href="#">A propos
-							<span class="visually-hidden">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="#">Mon compte
-							<span class="visually-hidden">(current)</span>
-						</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link active" href="{{ path('app_login_logout') }}">Se déconnecter
 							<span class="visually-hidden">(current)</span>
 						</a>
 					</li>
@@ -44,6 +34,11 @@
 		<div class="jumbotron">
 			<p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi consequatur eaque asperiores nobis illum sunt doloremque beatae, minima a non perspiciatis maiores inventore nisi ratione quas quod qui. Praesentium, recusandae?</p>
 		</div>
+
+
+		<button onclick="window.location.href = '/login';">
+			Se connecter
+		</button>
 
 	</div>
 

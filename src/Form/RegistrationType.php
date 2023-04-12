@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -57,87 +58,19 @@ class RegistrationType extends AbstractType
                 ]
             ])
 
-            ->add('name', TextType::class, [
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Admin' => 'ROLE_ADMIN',
+                    'Prod' => 'ROLE_PROD',
+                    'Logistique' => 'ROLE_LOGISTIQUE',
+                    'Facturation' => 'ROLE_FACTURATION'
+                ],
+                'multiple' => true,
+                'expanded' => true,
                 'attr' => [
                     'class' => 'form-control',
                 ],
-                'label' => 'Nom :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('firstname', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Prenom :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('address', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Adresse :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('postalcode', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Code postale :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('city', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Ville :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                ]
-            ])
-
-            ->add('phonesNumber', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'required' => false,
-                'label' => 'Numéros téléphones :',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-            ])
-
-            ->add('siret', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
-                'label' => 'Numéros SIRET :',
+                'label' => 'Roles de l\'utilisateur :',
                 'label_attr' => [
                     'class' => 'form-label mt-4'
                 ],
@@ -150,7 +83,7 @@ class RegistrationType extends AbstractType
                 'attr' => [
                     "class" => 'btn btn-success mt-5',
                 ],
-                'label' => 'S\'inscrire',
+                'label' => 'Inscire le compte ',
 
             ]);
     }

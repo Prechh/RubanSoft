@@ -16,6 +16,7 @@ use App\Repository\CommandeRepository;
 use Symfony\Component\Mailer\Transport;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommandeController extends AbstractController
 {
-    #[Route('/commande', name: 'app_commande')]
+    #[Route('/commande', name: 'app_commande_view')]
+    #[IsGranted('ROLE_PROD')]
     public function index(CommandeRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $commandes = $paginator->paginate(
@@ -83,6 +85,7 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/commande/edit/{id}', 'app_commande_edit',  methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_PROD')]
     public function edit(Commande $commande, Request $request, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(CommandeAdminType::class, $commande);
@@ -121,6 +124,7 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/commande/logistique', name: 'app_commande_logistique')]
+    #[IsGranted('ROLE_LOGISTIQUE')]
     public function show(CommandeRepository $repositorys, PaginatorInterface $paginators, Request $requests): Response
     {
         $commandes = $paginators->paginate(
@@ -135,6 +139,7 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/commande/logistique/edit/{id}', 'app_commande_logistique_edit',  methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_LOGISTIQUE')]
     public function showEdit(Commande $commande, Request $request, EntityManagerInterface $manager): Response
     {
         $form = $this->createForm(CommandeLogistiqueType::class, $commande);
@@ -173,6 +178,7 @@ class CommandeController extends AbstractController
 
 
     #[Route('/commande/facturation', name: 'app_commande_facturation')]
+    #[IsGranted('ROLE_FACTURATION')]
     public function facturation(CommandeRepository $repositorys, PaginatorInterface $paginators, Request $requests): Response
     {
         $commandes = $paginators->paginate(
@@ -187,6 +193,7 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/commande/facturation/edit/{id}', 'app_commande_facturation_edit',  methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_FACTURATION')]
     public function facturationEdit(Commande $commande, Request $request, EntityManagerInterface $manager, MailerInterface $mailer): Response
     {
         $form = $this->createForm(CommandeFacturationType::class, $commande);
@@ -225,6 +232,8 @@ class CommandeController extends AbstractController
 
 
     #[Route('/pdf/{id}', name: 'commande.pdf')]
+    #[IsGranted('ROLE_FACTURATION')]
+
     public function generatePdf(Pdf $pdf, Commande $commande)
     {
         $html = $this->renderView('commande/factureTemplate.html.twig', [

@@ -1,3 +1,23 @@
 controllers:
   resource: ../src/Controller/
   type: attribute
+
+admin_page:
+  path: /app_home_admin
+  controller: App\Controller\HomeAdminController::index
+  methods: GET
+
+prod_page:
+  path: /app_commande_view
+  controller: App\Controller\CommandeController::index
+  methods: GET
+
+facturation_page:
+  path: /app_commande_facturation
+  controller: App\Controller\CommandeController::facturation
+  methods: GET
+
+logistique_page:
+  path: /app_commande_logistique
+  controller: App\Controller\CommandeController::show
+  methods: GET
